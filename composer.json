@@ -1,0 +1,31 @@
+{
+    "name": "onetoweb/eboekhouden",
+    "description": "e-Boekhouden.nl API Client",
+    "keywords": [
+        "api",
+        "php",
+        "e-boekhouden.nl",
+        "e-boekhouden"
+    ],
+    "type": "library",
+    "homepage": "https://github.com/onetoweb/eboekhouden",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonathan van 't Ende",
+            "email": "jvantende@onetoweb.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "symfony/polyfill-php81": "^1.28"
+    },
+    "require-dev": {
+        "symfony/error-handler": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onetoweb\\Eboekhouden\\": "src/"
+        }
+    }
+}

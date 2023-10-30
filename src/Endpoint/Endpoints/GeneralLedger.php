@@ -12,65 +12,50 @@ class GeneralLedger extends AbstractEndpoint
     /**
      * @param array $filter = []
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(array $filter = []): ?array
+    public function list(array $filter = []): array
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetGrootboekrekeningen', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetGrootboekrekeningenResult']['Rekeningen']['cGrootboekrekening'])) {
-            
-            return $this->returnList($processedResponse['GetGrootboekrekeningenResult']['Rekeningen']['cGrootboekrekening']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Rekeningen', 'cGrootboekrekening');
     }
     
     /**
-     * @param array $data = []
+     * @param array $data
      * 
-     * @return array|int|null
+     * @return int|null
      */
-    public function create(array $data = [])
+    public function create(array $data): ?int
     {
         $params = $this->addSession(['oGb' => $data]);
         
         $response = $this->soapClient->__soapCall('AddGrootboekrekening', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (
-            isset($processedResponse['AddGrootboekrekeningResult']['Gb_ID'])
-            and !empty($processedResponse['AddGrootboekrekeningResult']['Gb_ID'])
-        ) {
-            return $processedResponse['AddGrootboekrekeningResult']['Gb_ID'];
+        if (isset($processedResponse['Gb_ID'])) {
+            return $processedResponse['Gb_ID'];
         }
         
-        return $processedResponse;
+        return null;
     }
     
     /**
-     * @param array $data = []
+     * @param array $data
      * 
-     * @return array|null
+     * @return void
      */
-    public function update(array $data = [])
+    public function update(array $data): void
     {
         $params = $this->addSession(['oGb' => $data]);
         
         $response = $this->soapClient->__soapCall('UpdateGrootboekrekening', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
-        
-        if (isset($processedResponse['UpdateGrootboekrekeningResult'])) {
-            
-            return $processedResponse['UpdateGrootboekrekeningResult'];
-        }
-        
-        return $processedResponse;
+        $this->handleResponse($response);
     }
 }

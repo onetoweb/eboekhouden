@@ -12,23 +12,16 @@ class Article extends AbstractEndpoint
     /**
      * @param array $filter = []
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(array $filter = []): ?array
+    public function list(array $filter = []): array
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetArtikelen', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        dump($processedResponse);
-        
-        if (isset($processedResponse['GetArtikelenResult']['Artikelen']['cArtikel'])) {
-            
-            return $this->returnList($processedResponse['GetArtikelenResult']['Artikelen']['cArtikel']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Artikelen', 'cArtikel');
     }
 }

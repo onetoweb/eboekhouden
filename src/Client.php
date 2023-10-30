@@ -52,7 +52,10 @@ class Client
         $this->securityCode2 = $securityCode2;
         
         // setup soap client
-        $this->soapClient = new SoapClient(Client::BASE_WDSL, ['trace' => true]);
+        $this->soapClient = new SoapClient(Client::BASE_WDSL, [
+            'trace' => true,
+            'features' => SOAP_SINGLE_ELEMENT_ARRAYS
+        ]);
         
         // load endpoints
         $this->loadEndpoints();

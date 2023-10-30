@@ -32,7 +32,7 @@ Create General Ledger Account
         'ID' => '',
         'Code' => '800001',
         'Omschrijving' => 'Foo Bar 1',
-        'Categorie' => 'BAL',
+        'Categorie' => 'BAR',
         'Groep' => ''
     ]);
 
@@ -46,7 +46,7 @@ Update General Ledger Account
         'ID' => '10000000',
         'Code' => '800002',
         'Omschrijving' => 'Foo Bar 2',
-        'Categorie' => 'BAL',
+        'Categorie' => 'FOO',
         'Groep' => ''
     ]);
 

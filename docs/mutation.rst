@@ -34,15 +34,36 @@ Create Mutation
     $result = $client->mutation->create([
         'MutatieNr' => '',
         'Soort' => 'Memoriaal',
-        'Datum' => '2023-10-26',
-        'Rekening' => '',
+        'Datum' => '2023-10-30',
+        'Rekening' => '800001',
         'RelatieCode' => '',
         'Factuurnummer' => '',
         'Boekstuk' => '',
         'Omschrijving' => 'Mutatie',
         'Betalingstermijn' => '',
         'Betalingskenmerk' => '',
-        'InExBTW' => 'IN'
+        'InExBTW' => 'IN',
+        'MutatieRegels' => [
+            [
+                'BedragInvoer' => 0,
+                'BedragExclBTW' => 0,
+                'BedragBTW' => 0,
+                'BedragInclBTW' => 0,
+                'BTWCode' => '',
+                'BTWPercentage' => 21,
+                'TegenrekeningCode' => '800002',
+                'KostenplaatsID' => 0
+            ], [
+                'BedragInvoer' => 0,
+                'BedragExclBTW' => 0,
+                'BedragBTW' => 0,
+                'BedragInclBTW' => 0,
+                'BTWCode' => '',
+                'BTWPercentage' => 21,
+                'TegenrekeningCode' => '800003',
+                'KostenplaatsID' => 0
+            ]
+        ]
     ]);
 
 

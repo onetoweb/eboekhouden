@@ -12,44 +12,38 @@ class Invoice extends AbstractEndpoint
     /**
      * @param array $filter = []
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(array $filter = []): ?array
+    public function list(array $filter = []): array
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetFacturen', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetFacturenResult']['Facturen']['cFactuurList'])) {
-            
-            return $this->returnList($processedResponse['GetFacturenResult']['Facturen']['cFactuurList']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Facturen', 'cFactuurList');
     }
     
     /**
-     * @param array $data = []
+     * @param array $data
      * 
-     * @return array|string|null
+     * @return int|null
      */
-    public function create(array $data = [])
+    public function create(array $data): ?int
     {
+        $this->addRowStruct($data, 'Regels', 'cFactuurRegel');
+        
         $params = $this->addSession(['oFact' => $data]);
         
         $response = $this->soapClient->__soapCall('AddFactuur', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (
-            isset($processedResponse['AddFactuurResult']['Factuurnummer'])
-            and !empty($processedResponse['AddFactuurResult']['Factuurnummer'])
-        ) {
-            return $processedResponse['AddFactuurResult']['Factuurnummer'];
+        if (isset($processedResponse['Factuurnummer'])) {
+            return $processedResponse['Factuurnummer'];
         }
         
-        return $processedResponse;
+        return null;
     }
 }

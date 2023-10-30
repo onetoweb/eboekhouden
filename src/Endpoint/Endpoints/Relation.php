@@ -20,57 +20,42 @@ class Relation extends AbstractEndpoint
         
         $response = $this->soapClient->__soapCall('GetRelaties', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetRelatiesResult']['Relaties']['cRelatie'])) {
-            
-            return $this->returnList($processedResponse['GetRelatiesResult']['Relaties']['cRelatie']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Relaties', 'cRelatie');
     }
     
     /**
-     * @param array $data = []
-     *
-     * @return array|int|null
+     * @param array $data
+     * 
+     * @return int|null
      */
-    public function create(array $data = [])
+    public function create(array $data): ?int
     {
         $params = $this->addSession(['oRel' => $data]);
         
         $response = $this->soapClient->__soapCall('AddRelatie', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (
-            isset($processedResponse['AddRelatieResult']['Rel_ID'])
-            and !empty($processedResponse['AddRelatieResult']['Rel_ID'])
-        ) {
-            return $processedResponse['AddRelatieResult']['Rel_ID'];
+        if (isset($processedResponse['Rel_ID'])) {
+            return $processedResponse['Rel_ID'];
         }
         
-        return $processedResponse;
+        return null;
     }
     
     /**
-     * @param array $data = []
-     *
-     * @return array|int|null
+     * @param array $data
+     * 
+     * @return void
      */
-    public function update(array $data = [])
+    public function update(array $data): void
     {
         $params = $this->addSession(['oRel' => $data]);
         
         $response = $this->soapClient->__soapCall('UpdateRelatie', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
-        
-        if (isset($processedResponse['UpdateRelatieResult'])) {
-            
-            return $processedResponse['UpdateRelatieResult'];
-        }
-        
-        return $processedResponse;
+        $this->handleResponse($response);
     }
 }

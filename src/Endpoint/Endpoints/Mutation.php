@@ -20,36 +20,30 @@ class Mutation extends AbstractEndpoint
         
         $response = $this->soapClient->__soapCall('GetMutaties', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetMutatiesResult']['Mutaties']['cMutatieList'])) {
-            
-            return $this->returnList($processedResponse['GetMutatiesResult']['Mutaties']['cMutatieList']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Mutaties', 'cMutatieList');
     }
     
     /**
-     * @param array $data = []
-     *
-     * @return array|string|null
+     * @param array $data
+     * 
+     * @return int|null
      */
-    public function create(array $data = [])
+    public function create(array $data): ?int
     {
+        $this->addRowStruct($data, 'MutatieRegels', 'cMutatieRegel');
+        
         $params = $this->addSession(['oMut' => $data]);
         
         $response = $this->soapClient->__soapCall('AddMutatie', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (
-            isset($processedResponse['AddMutatieResult']['Mutatienummer'])
-            and !empty($processedResponse['AddMutatieResult']['Mutatienummer'])
-        ) {
-            return $processedResponse['AddMutatieResult']['Mutatienummer'];
+        if (isset($processedResponse['Mutatienummer'])) {
+            return $processedResponse['Mutatienummer'];
         }
         
-        return $processedResponse;
+        return null;
     }
 }

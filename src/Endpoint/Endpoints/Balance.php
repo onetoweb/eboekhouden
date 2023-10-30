@@ -10,44 +10,38 @@ use Onetoweb\Eboekhouden\Endpoint\AbstractEndpoint;
 class Balance extends AbstractEndpoint
 {
     /**
-     * @param array $filter = null
+     * @param array $filter = []
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(array $filter = []): ?array
+    public function list(array $filter = []): array
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetSaldi', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetSaldiResult']['Saldi']['cSaldo'])) {
-            
-            return $this->returnList($processedResponse['GetSaldiResult']['Saldi']['cSaldo']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Saldi', 'cSaldo');
     }
     
     /**
-     * @param array $filter = null
+     * @param array $filter = []
      * 
-     * @return array|int|null
+     * @return float|null
      */
-    public function get(array $filter = [])
+    public function get(array $filter = []): ?float
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetSaldo', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetSaldoResult']['Saldo'])) {
-            
-            return $processedResponse['GetSaldoResult']['Saldo'];
+        if (isset($processedResponse['Saldo'])) {
+            return $processedResponse['Saldo'];
         }
         
-        return $processedResponse;
+        return null;
     }
 }

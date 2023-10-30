@@ -10,20 +10,16 @@ use Onetoweb\Eboekhouden\Endpoint\AbstractEndpoint;
 class Administration extends AbstractEndpoint
 {
     /**
-     * @return array|null
+     * @return array
      */
-    public function list(): ?array
+    public function list(): array
     {
         $params = $this->addSession();
         
         $response = $this->soapClient->__soapCall('GetAdministraties', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetAdministratiesResult']['Administraties']['cAdministratie'])) {
-            return $processedResponse['GetAdministratiesResult']['Administraties']['cAdministratie'];
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Administraties', 'cAdministratie');
     }
 }

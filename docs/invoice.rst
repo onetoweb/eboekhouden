@@ -54,26 +54,24 @@ Create Invoice
         'IncassoOmschrijvingRegel3' => '',
         'InBoekhoudingPlaatsen' => true,
         'Regels' => [
-            'cFactuurRegel' => [
-                [
-                    'Aantal' => 1.0,
-                    'Eenheid' => '',
-                    'Code' => '',
-                    'Omschrijving' => '',
-                    'PrijsPerEenheid' => 0.0,
-                    'BTWCode' => '',
-                    'TegenrekeningCode' => '',
-                    'KostenplaatsID' => 0
-                ], [
-                    'Aantal' => 1.0,
-                    'Eenheid' => '',
-                    'Code' => '',
-                    'Omschrijving' => '',
-                    'PrijsPerEenheid' => 0.0,
-                    'BTWCode' => '',
-                    'TegenrekeningCode' => '',
-                    'KostenplaatsID' => 0
-                ]
+            [
+                'Aantal' => 1.0,
+                'Eenheid' => '',
+                'Code' => '',
+                'Omschrijving' => '',
+                'PrijsPerEenheid' => 0.0,
+                'BTWCode' => '',
+                'TegenrekeningCode' => '',
+                'KostenplaatsID' => 0
+            ], [
+                'Aantal' => 1.0,
+                'Eenheid' => '',
+                'Code' => '',
+                'Omschrijving' => '',
+                'PrijsPerEenheid' => 0.0,
+                'BTWCode' => '',
+                'TegenrekeningCode' => '',
+                'KostenplaatsID' => 0
             ]
         ],
     ]);

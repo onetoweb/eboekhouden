@@ -10,23 +10,18 @@ use Onetoweb\Eboekhouden\Endpoint\AbstractEndpoint;
 class OpenPost extends AbstractEndpoint
 {
     /**
-     * @param string $type = ''
+     * @param string $type
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(string $type = ''): ?array
+    public function list(string $type): array
     {
         $params = $this->addSession(['OpSoort' => $type]);
         
         $response = $this->soapClient->__soapCall('GetOpenPosten', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetOpenPostenResult']['Openposten']['cOpenPost'])) {
-            
-            return $this->returnList($processedResponse['GetOpenPostenResult']['Openposten']['cOpenPost']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Openposten', 'cOpenPost');
     }
 }

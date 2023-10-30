@@ -12,21 +12,16 @@ class CostCenter extends AbstractEndpoint
     /**
      * @param array $filter = []
      * 
-     * @return array|null
+     * @return array
      */
-    public function list(array $filter = []): ?array
+    public function list(array $filter = []): array
     {
         $params = $this->addSession(['cFilter' => $filter]);
         
         $response = $this->soapClient->__soapCall('GetKostenplaatsen', [$params]);
         
-        $processedResponse = $this->proccessResponse($response);
+        $processedResponse = $this->handleResponse($response);
         
-        if (isset($processedResponse['GetKostenplaatsenResult']['Kostenplaatsen']['cKostenplaats'])) {
-            
-            return $this->returnList($processedResponse['GetKostenplaatsenResult']['Kostenplaatsen']['cKostenplaats']);
-        }
-        
-        return $processedResponse;
+        return $this->returnData($processedResponse, 'Kostenplaatsen', 'cKostenplaats');
     }
 }

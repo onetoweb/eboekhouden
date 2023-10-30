@@ -12,7 +12,7 @@ Setup Client
     
     use Onetoweb\Eboekhouden\Client;
     
-    // param
+    // params
     $username = '{username}';
     $securityCode1 = '{security_code_1}';
     $securityCode2 = '{security_code_2}';

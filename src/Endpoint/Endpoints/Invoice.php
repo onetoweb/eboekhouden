@@ -28,9 +28,9 @@ class Invoice extends AbstractEndpoint
     /**
      * @param array $data
      * 
-     * @return int|null
+     * @return string|null
      */
-    public function create(array $data): ?int
+    public function create(array $data): ?string
     {
         $this->addRowStruct($data, 'Regels', 'cFactuurRegel');
         

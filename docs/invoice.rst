@@ -53,6 +53,7 @@ Create Invoice
         'IncassoOmschrijvingRegel2' => '',
         'IncassoOmschrijvingRegel3' => '',
         'InBoekhoudingPlaatsen' => true,
+        'BoekhoudmutatieOmschrijving' => '',
         'Regels' => [
             [
                 'Aantal' => 1.0,

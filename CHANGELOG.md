@@ -11,3 +11,7 @@
  - Adding mutation rows with array
  - Throws InputException if errors are returned
  - Stricter type control
+
+## [1.1.1] - 2023-11-21
+
+ - Return type create invoice null or string

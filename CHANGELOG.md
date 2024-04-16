@@ -15,3 +15,7 @@
 ## [1.1.1] - 2023-11-21
 
  - Return type create invoice null or string
+
+## [1.1.2] - 2023-04-16
+
+ - AllowDynamicProperties in Client to prevent php 8.2 deprecation notice

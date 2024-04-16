@@ -8,6 +8,7 @@ use SoapClient;
 /**
  * E-Boekhouden Api Client.
  */
+#[\AllowDynamicProperties]
 class Client
 {
     /**

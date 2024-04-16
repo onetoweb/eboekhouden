@@ -2,8 +2,6 @@
 
 namespace Onetoweb\Eboekhouden\Endpoint;
 
-use Onetoweb\Eboekhouden\Client;
-
 /**
  * Endpoints.
  */
@@ -28,7 +26,7 @@ final class Endpoints
                 
                 $class = __NAMESPACE__ . "\\Endpoints\\$endpoint";
                 
-                if (class_exists($class) and in_array(EndpointInterface::class, class_implements($class))) {
+                if (is_a($class, EndpointInterface::class, true)) {
                     $endpoints[lcfirst($endpoint)] = $class;
                 }
             }
